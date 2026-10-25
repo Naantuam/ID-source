@@ -107,8 +107,9 @@ body {
 
 /* Outer layout wrapper */
 .app-container {
-  max-width: 768px; /* Clean mobile & tablet focused layout as seen in law-enforcement field devices */
-  margin: 0 auto;
+  /* Bars span the full width; content is centred to --content-w via padding. */
+  --content-w: 768px;
+  --gutter: max(20px, calc((100% - var(--content-w)) / 2));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -175,7 +176,7 @@ body {
 
 .app-logo-badge {
   background-color: var(--accent-mint);
-  color: var(--primary-deep);
+  color: #0f382a;
   font-size: 1.3rem;
   font-weight: 800;
   width: 48px;
@@ -934,7 +935,10 @@ body {
     background: #ffffff;
   }
   .app-container {
-    max-width: 100%;
+    --content-w: 100%;
+  }
+  .workspace {
+    display: block !important;
   }
   .top-status-bar, .btn-primary, .btn-secondary, .preset-bar, .form-group {
     display: none !important;
@@ -1044,8 +1048,39 @@ body {
 }
 
 @media (max-width: 480px) {
-  .main-content { padding: 16px 16px 32px; }
-  .hero-header { padding: 18px 16px 20px; }
+  .app-container { --gutter: 16px; }
   .stats-grid { gap: 8px; }
   .dossier-grid { grid-template-columns: 1fr; }
+}
+
+/* Full-width bars with centred content */
+.top-status-bar { padding-left: var(--gutter); padding-right: var(--gutter); }
+.hero-header { padding-left: var(--gutter); padding-right: var(--gutter); }
+.main-content { padding-left: var(--gutter); padding-right: var(--gutter); }
+.workspace { display: flex; flex-direction: column; gap: 16px; }
+.workspace > * { min-width: 0; }
+
+/* Desktop: lookup panel on the left, results on the right */
+@media (min-width: 1024px) {
+  .app-container { --content-w: 1240px; }
+  .main-content { padding-top: 24px; gap: 20px; }
+  .hero-header { padding-top: 24px; padding-bottom: 28px; }
+  .hero-titles h1 { font-size: 1.6rem; }
+  .workspace {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .lookup-panel { position: sticky; top: 20px; }
+  .results-panel { min-height: 420px; padding: 24px; }
+  .results-panel .empty-state-box { padding: 80px 20px; }
+  .face-portrait-frame { width: 160px; height: 194px; }
+  .dossier-grid { grid-template-columns: repeat(3, 1fr); gap: 12px 16px; }
+  .graph { min-width: 0; max-height: 560px; }
+}
+
+@media (min-width: 1440px) {
+  .app-container { --content-w: 1360px; }
+  .workspace { grid-template-columns: 400px 1fr; }
 }

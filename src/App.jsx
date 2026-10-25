@@ -124,7 +124,8 @@ export default function App() {
           </div>
         </div>
 
-        <form className="panel-card" onSubmit={search}>
+        <div className="workspace">
+        <form className="panel-card lookup-panel" onSubmit={search}>
           <h2 className="panel-title">Identity lookup</h2>
           <p className="panel-desc">
             Search the fictional demo registry by sample NIN, case reference or suspect photo.
@@ -194,7 +195,7 @@ export default function App() {
           </p>
         </form>
 
-        <section className="panel-card">
+        <section className="panel-card results-panel">
           <h2 className="panel-title">Investigation results</h2>
           <p className="panel-desc">
             {result ? 'Face cross-reference against the sample registry.' : 'Enter a sample NIN to begin.'}
@@ -217,6 +218,7 @@ export default function App() {
             </div>
           )}
         </section>
+        </div>
 
         <p className="security-footer-note">
           Security design note: a production deployment should use authorised data sources, strong

@@ -34,7 +34,7 @@ export default function LinkGraph({ identities, subjectNin }) {
         n.phones.map((p) => (
           <g key={p.number}>
             <circle cx={p.x} cy={p.y} r="5" className="node-phone" />
-            <text x={p.x} y={p.y + 16} textAnchor="middle" className="label-sm">
+            <text x={p.x} y={p.y < n.y ? p.y - 9 : p.y + 16} textAnchor="middle" className="label-sm">
               {p.number.slice(-4)} · {p.carrier.split(" ")[0]}
             </text>
           </g>
